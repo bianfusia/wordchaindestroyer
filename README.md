@@ -1,5 +1,7 @@
 # Word Chain Destroyer
 
+![alt text](https://github.com/bianfusia/wordchaindestroyer/blob/main/ss/Untitled.png "on9 Word Chain Destroyer")
+
 ## Background
 
 I was annoyed by the fact that people in the on9 word chain channel are unusually strong. It is as though they had help from extra terrestrial lifeform!
