@@ -6,7 +6,7 @@ base = None
 
 executables = [Executable("main.py", base=base)]
 
-packages = ["idna","requests","random"]
+packages = ["idna","requests","random","art"]
 options = {
     'build_exe': {    
         'packages':packages,
