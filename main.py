@@ -30,7 +30,8 @@ for key in data:
 
 def get_word(start_letter,con_letter,no_word):
     
-    global man_list
+    global keep_list
+    man_list = keep_list.copy()
 
     man_list = list(filter(lambda x: (len(x) >= no_word), man_list))
 
@@ -40,6 +41,8 @@ def get_word(start_letter,con_letter,no_word):
 
     full_int = len(man_list)-1
     rand_word = (random.randint(0,full_int))
+    chosen_word = man_list[rand_word]
+    keep_list.remove(chosen_word)
 
     if full_int < 0:
         return print("\n" + "no available words detected" + "\n")
@@ -50,24 +53,31 @@ def get_word(start_letter,con_letter,no_word):
 
 def get_last(start_letter, last_letter):
 
-    global man_list
     global keep_list
-
+    man_list = keep_list.copy()
+    
+    man_list = list(filter(lambda x: (last_letter == x[-1]), man_list))
+    man_list = list(filter(lambda x: (len(x) >= 10), man_list))
     man_list = list(filter(lambda x : (x[0] == start_letter), man_list))
 
     full_int = len(man_list)-1
 
     if full_int < 0:
-
-        keep_list = list(filter(lambda x : (x[0] == start_letter), keep_list))
-        full_int = len(keep_list)-1
+        man_list = keep_list.copy()
+        man_list = list(filter(lambda x : (x[0] == start_letter), man_list))
+        man_list = list(filter(lambda x: (len(x) >= 10), man_list))
+        full_int = len(man_list)-1
         rand_word = (random.randint(0,full_int))
-        print("\n" + keep_list.pop(rand_word)+ "\n")
+        chosen_word = man_list[rand_word]
+        keep_list.remove(chosen_word)
+        print("\n" + man_list.pop(rand_word)+ "\n")
     
     else:
 
         full_int = len(man_list)-1
         rand_word = (random.randint(0,full_int))
+        chosen_word = man_list[rand_word]
+        keep_list.remove(chosen_word)
         print("\n" + man_list.pop(rand_word) + "\n")
 
 print(text2art('''On9
@@ -79,7 +89,6 @@ print("developed by: @beeeatant")
 
 while True:
 
-    man_list = word_list.copy()
     keep_list = word_list.copy()
 
     choice = int(input("\n" + "1: required letter\n2: hard mode\nPlease choose a mode:"))
@@ -104,10 +113,7 @@ while True:
 
             print("\n" + "Key 1 at the start letter to end game")
             last_letter = str(input("key in the ending letter: "))
-            man_list = list(filter(lambda x: (last_letter == x[-1]), man_list))
-            man_list = list(filter(lambda x: (len(x) >= 10), man_list))
-            keep_list = list(filter(lambda x: (last_letter != x[-1]), keep_list))
-            keep_list = list(filter(lambda x: (len(x) >= 10), keep_list))
+
             while True:
 
                 start_letter = str(input("\n" + "key in the start letter: "))
