@@ -1,0 +1,118 @@
+import requests
+
+import random
+
+from art import *
+
+ 
+
+url  = 'https://raw.githubusercontent.com/dwyl/english-words/master/words_dictionary.json'
+
+ 
+
+resp = requests.get(url=url)
+
+ 
+
+data = resp.json()
+
+word_list = []
+
+keep_list = []
+
+for key in data:
+
+    if len(key) > 2:
+
+        word_list.append(key)
+
+ 
+
+def get_word(start_letter,con_letter,no_word):
+    
+    global man_list
+
+    man_list = list(filter(lambda x: (len(x) >= no_word), man_list))
+
+    man_list = list(filter(lambda x : (x[0] == start_letter), man_list))
+
+    man_list = list(filter(lambda x: (con_letter in x), man_list))
+
+    full_int = len(man_list)-1
+    rand_word = (random.randint(0,full_int))
+
+    if full_int < 0:
+        return print("\n" + "no available words detected" + "\n")
+
+    print("\n" + man_list.pop(rand_word) + "\n")
+        
+
+
+def get_last(start_letter, last_letter):
+
+    global man_list
+    global keep_list
+
+    man_list = list(filter(lambda x : (x[0] == start_letter), man_list))
+
+    full_int = len(man_list)-1
+
+    if full_int < 0:
+
+        keep_list = list(filter(lambda x : (x[0] == start_letter), keep_list))
+        full_int = len(keep_list)-1
+        rand_word = (random.randint(0,full_int))
+        print("\n" + keep_list.pop(rand_word)+ "\n")
+    
+    else:
+
+        full_int = len(man_list)-1
+        rand_word = (random.randint(0,full_int))
+        print("\n" + man_list.pop(rand_word) + "\n")
+
+print(text2art('''On9
+Word Chain
+DESTROYER''', font="small"))
+
+print("developed by: @beeeatant")
+   
+
+while True:
+
+    man_list = word_list.copy()
+    keep_list = word_list.copy()
+
+    choice = int(input("\n" + "1: required letter\n2: hard mode\nPlease choose a mode:"))
+
+    while True:
+        if choice == 1:
+
+            print("\n" + "Key 1 at the start letter to end game \n")
+
+            start_letter = str(input("key in the start letter: "))
+            
+            if start_letter == "1":
+                break
+
+            con_letter = str(input("key in the contain letter: "))
+
+            no_word = int(input("number of words: "))
+
+            get_word(start_letter,con_letter,no_word)
+
+        elif choice == 2:
+
+            print("\n" + "Key 1 at the start letter to end game")
+            last_letter = str(input("key in the ending letter: "))
+            man_list = list(filter(lambda x: (last_letter == x[-1]), man_list))
+            man_list = list(filter(lambda x: (len(x) >= 10), man_list))
+            keep_list = list(filter(lambda x: (last_letter != x[-1]), keep_list))
+            keep_list = list(filter(lambda x: (len(x) >= 10), keep_list))
+            while True:
+
+                start_letter = str(input("\n" + "key in the start letter: "))
+                if start_letter == "1":
+                    break
+                get_last(start_letter, last_letter)
+
+            break
