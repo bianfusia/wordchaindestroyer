@@ -60,7 +60,6 @@ def get_last(start_letter, last_letter):
     man_list = list(filter(lambda x: (last_letter == x[-1]), man_list))
     man_list = list(filter(lambda x: (len(x) >= 10), man_list))
     man_list = list(filter(lambda x : (x[0] == start_letter), man_list))
-    man_list = list(filter(lambda x: (con_letter in x), man_list))
 
     full_int = len(man_list)-1
 
@@ -68,7 +67,6 @@ def get_last(start_letter, last_letter):
         man_list = keep_list.copy()
         man_list = list(filter(lambda x : (x[0] == start_letter), man_list))
         man_list = list(filter(lambda x: (len(x) >= 10), man_list))
-        man_list = list(filter(lambda x: (con_letter in x), man_list))
         full_int = len(man_list)-1
         rand_word = (random.randint(0,full_int))
         chosen_word = man_list[rand_word]
@@ -91,6 +89,7 @@ def ded_last(start_letter, last_letter, con_letter, no_word):
     man_list = list(filter(lambda x: (last_letter == x[-1]), man_list))
     man_list = list(filter(lambda x: (len(x) >= no_word), man_list))
     man_list = list(filter(lambda x : (x[0] == start_letter), man_list))
+    man_list = list(filter(lambda x: (con_letter in x), man_list))
 
     full_int = len(man_list)-1
 
@@ -98,6 +97,8 @@ def ded_last(start_letter, last_letter, con_letter, no_word):
         man_list = keep_list.copy()
         man_list = list(filter(lambda x : (x[0] == start_letter), man_list))
         man_list = list(filter(lambda x: (len(x) >= no_word), man_list))
+        man_list = list(filter(lambda x: (con_letter in x), man_list))
+
         full_int = len(man_list)-1
         rand_word = (random.randint(0,full_int))
         chosen_word = man_list[rand_word]
